@@ -5,7 +5,7 @@ Esse é um projeto PHP Utilizando [Tailwind CSS](https://tailwindcss.com) e [Doc
 
 ## Como executar
 
-1. Depois de ter instalado o docker compose na sua maquina, basta rodar o comando abaixo no mesmo diretorio do arquivo docker-compose.yml do projeto que deseja iniciar.
+1. Depois de ter instalado o docker compose na sua maquina, basta rodar o comando abaixo no mesmo diretorio do arquivo docker-compose.yml.
 
    ```bash
    docker-compose up -d
