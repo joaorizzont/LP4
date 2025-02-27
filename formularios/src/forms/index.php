@@ -279,6 +279,245 @@
                         placeholder="">
                 </div>
             </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="contractStartDate" class="w-[20%] block text-sm/6 font-medium text-gray-900">Contract Start Date</label>
+                <div class="flex w-[80%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="date"
+                        id="contractStartDate"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="contractExpireDate" class="w-[30%] block text-sm/6 font-medium text-gray-900">Contract Expire Date</label>
+                <div class="flex w-[70%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="text"
+                        id="contractExpireDate"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="minimumLoanAmount" class="w-[30%] block text-sm/6 font-medium text-gray-900">Minimum Loan Amount</label>
+                <div class="flex w-[70%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="number"
+                        id="minimumLoanAmount"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="maximumLoanAmount" class="w-[30%] block text-sm/6 font-medium text-gray-900">Maximum Loan Amount</label>
+                <div class="flex w-[70%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="number"
+                        id="maximumLoanAmount"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="interestRate" class="w-[30%] block text-sm/6 font-medium text-gray-900">Interest Rate</label>
+                <div class="flex w-[70%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="number"
+                        id="interestRate"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-row items-center gap-4">
+                <label for="depositAmount" class="w-[30%] block text-sm/6 font-medium text-gray-900">Deposit Amount</label>
+                <div class="flex w-[70%] items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="number"
+                        id="depositAmount"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full justify-center flex mt-5 gap-2">
+                <input class="bg-blue-500 h-10 px-5  text-white cursor-pointer" type="button" value="Save" />
+            </div>
+        </form>
+
+        <div class="w-full my-10">
+            <h1 class="font-bold">Formulário 4</h1>
+        </div>
+
+        <form class="p-3 w-full flex border border-2 border-gray-200 flex-wrap gap-5 sm:px-20 justify-between">
+            <h4 class="text-[30px] w-full text-left">Novo Usuário</h4>
+            <div class="w-full flex flex-col items-center gap-4">
+                <label for="name" class="w-full block text-sm/6 font-medium text-gray-900">Nome</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="text"
+                        id="name"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[20%] flex flex-col items-center gap-4">
+                <label for="cpf" class="w-full block text-sm/6 font-medium text-gray-900">CPF</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="number"
+                        id="cpf"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[55%] flex flex-col items-center gap-4">
+                <label for="address" class="w-full block text-sm/6 font-medium text-gray-900">Endereço</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="text"
+                        id="address"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[20%] flex flex-col items-center gap-4">
+                <label for="nivel" class="w-full block text-sm/6 font-medium text-gray-900">Nivel</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <select name="nivel" id="nivel" class="w-full">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%] flex flex-col items-center gap-4">
+                <label for="email" class="w-full block text-sm/6 font-medium text-gray-900">Email</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="text"
+                        id="email"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[30%] flex flex-col items-center gap-4">
+                <label for="password" class="w-full block text-sm/6 font-medium text-gray-900">Senha</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <input type="password"
+                        id="password"
+                        class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                        placeholder="">
+                </div>
+            </div>
+            <div class="w-full sm:w-[20%] flex flex-col items-center gap-4">
+                <label for="nivel" class="w-full block text-sm/6 font-medium text-gray-900">Nivel</label>
+                <div class="flex w-full items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                    <select name="nivel" id="nivel" class="w-full">
+                        <option value="Casado">Casado</option>
+                        <option value="Solteiro">Solteiro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full justify-end flex mt-5 gap-2">
+                <input class="bg-green-700 rounded-md h-10 px-5  text-white cursor-pointer" type="button" value="Enviar" />
+                <input class="bg-white h-10 px-5 rounded-md border-1 border-black border text-black cursor-pointer" type="button" value="Cancelar" />
+            </div>
+        </form>
+
+        <div class="w-full mb-10">
+            <h1 class="font-bold ">Formulário 1</h1>
+        </div>
+
+        <form method="post" id="form1" action="form1.php" class="p-3 w-full flex border border-2 border-gray-200 gap-4 flex-wrap justify-between">
+            <h4 class="text-[30px] w-full text-left">Billing address</h4>
+            <div class="w-full sm:w-[45%]">
+                <label for="first-name" class="block text-sm/6 font-medium text-gray-900">First Name</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="first-name" name="firstName"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-[45%]">
+                <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Last Name</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white pl-3 h-10 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="last-name" name="lastName"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full">
+                <label for="username" class="block text-sm/6 font-medium text-gray-900">Username</label>
+                <div class="w-full">
+                    <div class=" overflow-hidden flex flex-row items-center h-10 rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <div class="w-[15%] h-full bg-gray-300 flex font-bold text-lg justify-center items-center">@
+                        </div>
+                        <input type="text" id="username" name="username"
+                            class="w-[80%] block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full">
+                <label for="email" class="block text-sm/6 font-medium text-gray-900">Email <label class="text-gray-500">(Optional)</label></label>
+
+                <div class="w-full">
+                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="email" name="email"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full">
+                <label for="address" class="block text-sm/6 font-medium text-gray-900">Address</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="address" name="address"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full">
+                <label for="email" class="block text-sm/6 font-medium text-gray-900">Address 2 <label class="text-gray-500">(Optional)</label></label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="address" name="address"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-[40%]">
+                <label for="country" class="block text-sm/6 font-medium text-gray-900">Country</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <select name="country" id="country" class="w-full">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-[25%]">
+                <label for="state" class="block text-sm/6 font-medium text-gray-900">State</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white h-10 pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <select name="state" id="state" class="w-full">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-[25%]">
+                <label for="zip" class="block text-sm/6 font-medium text-gray-900">Zip</label>
+                <div>
+                    <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                        <input type="text" id="zip" name="zip"
+                            class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+                            placeholder="">
+                    </div>
+                </div>
+            </div>
+            <input class="bg-blue-500 h-10 px-5 rounded-sm text-white  cursor-pointer" type="submit" form="form1" value="Submit form" />
         </form>
     </div>
 </body>
