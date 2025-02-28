@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case "fahrenheitParaCelsius":
                 return ($fahrenheit - 32) * 5 / 9;
             case "areaRetangulo":
-                return $largura * $_POST["altura"];
+                return $largura * $altura;
             case "areaCirculo":
                 return pi() * pow($raio, 2);
             case "perimetroRetangulo":
@@ -116,6 +116,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="fahrenheitParaCelsius" <?= ($tipo == "fahrenheitParaCelsius") ? "selected" : "" ?>>Fahrenheit → Celsius</option>
                 <option value="areaRetangulo" <?= ($tipo == "areaRetangulo") ? "selected" : "" ?>>Área do Retângulo</option>
                 <option value="areaCirculo" <?= ($tipo == "areaCirculo") ? "selected" : "" ?>>Área do Círculo</option>
+                <option value="perimetroRetangulo" <?= ($tipo == "perimetroRetangulo") ? "selected" : "" ?>>Perimetro do Retangulo</option>
+                <option value="potencia" <?= ($tipo == "potencia") ? "selected" : "" ?>>Potencia</option>
+
             </select>
 
             <?php if (in_array($tipo, ["soma", "subtracao", "multiplicacao", "divisao"])): ?>
@@ -125,16 +128,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="number" name="nota1" placeholder="Nota 1" step="any" required class="w-full p-2 border rounded-lg">
                 <input type="number" name="nota2" placeholder="Nota 2" step="any" required class="w-full p-2 border rounded-lg">
                 <input type="number" name="nota3" placeholder="Nota 3" step="any" required class="w-full p-2 border rounded-lg">
+
             <?php elseif ($tipo == "celsiusParaFahrenheit"): ?>
                 <input type="number" name="celsius" placeholder="Temperatura (°C)" step="any" required class="w-full p-2 border rounded-lg">
+
             <?php elseif ($tipo == "fahrenheitParaCelsius"): ?>
                 <input type="number" name="fahrenheit" placeholder="Temperatura (°F)" step="any" required class="w-full p-2 border rounded-lg">
+
             <?php elseif ($tipo == "areaRetangulo" || $tipo == "perimetroRetangulo"): ?>
                 <input type="number" name="largura" placeholder="Largura" step="any" required class="w-full p-2 border rounded-lg">
                 <input type="number" name="altura" placeholder="Altura" step="any" required class="w-full p-2 border rounded-lg">
+
             <?php elseif ($tipo == "areaCirculo" || $tipo == "perimetroCirculo"): ?>
                 <input type="number" name="raio" placeholder="Raio" step="any" required class="w-full p-2 border rounded-lg">
+
+            <?php elseif ($tipo == "potencia"): ?>
+                <input type="number" name="base" placeholder="Base" step="any" required class="w-full p-2 border rounded-lg">
+                <input type="number" name="expoente" placeholder="Expoente" step="any" required class="w-full p-2 border rounded-lg">
+
+            <?php elseif ($tipo == "metrosParaCm"): ?>
+                <input type="number" name="metrosParaCm" placeholder="Metros" step="any" required class="w-full p-2 border rounded-lg">
+
+
+
+                <!-- TODO
+                
+                implementar
+
+               
+
+            case "metrosParaCm":
+                return $metros * 100;
+            case "kmParaMilhas":
+                return $km * 0.621371;
+            case "imc":
+                return $peso / pow($altura, 2);
+            case "desconto":
+                return $preco - ($preco * ($percentual / 100));
+            case "jurosSimples":
+                return $capital * ($taxa / 100) * $periodo;
+            case "jurosCompostos":
+                return $capital * pow((1 + ($taxa / 100)), $periodo);
+            case "diasParaSegundos":
+                return [
+                    "horas" => $dias * 24,
+                    "minutos" => $dias * 24 * 60,
+                    "segundos" => $dias * 24 * 60 * 60
+                ];
+            case "velocidadeMedia":
+                return $distancia / $tempo; -->
+
+
+
             <?php endif; ?>
+
+
+
 
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Calcular</button>
         </form>
