@@ -112,8 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if (isset($caracteres)): ?>
                 <p class="text-center mt-4">Número de caracteres: <?= $caracteres ?></p>
             <?php endif; ?>
-
-
+        </form>
+        <form method="POST" class="space-y-4">
             <label class="block text-lg font-medium">Digite uma palavra:</label>
             <input type="text" name="palavra" placeholder="Digite a palavra" required class="w-full p-2 border rounded-lg">
 
@@ -121,7 +121,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if (isset($maiusculoMinusculo)): ?>
                 <p class="text-center mt-4">Maiúsculo: <?= $maiusculoMinusculo['maiúsculo'] ?><br>Minúsculo: <?= $maiusculoMinusculo['minúsculo'] ?></p>
             <?php endif; ?>
-
+        </form>
+        
+        <form method="POST" class="space-y-4">
 
             <label class="block text-lg font-medium">Digite a primeira palavra:</label>
             <input type="text" name="palavra1" placeholder="Digite a primeira palavra" required class="w-full p-2 border rounded-lg">
@@ -133,7 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if (isset($subString)): ?>
                 <p class="text-center mt-4"><?= $subString ? "A segunda palavra está contida na primeira." : "A segunda palavra não está contida na primeira." ?></p>
             <?php endif; ?>
-
+        </form>
+        <form method="POST" class="space-y-4">
 
             <label class="block text-lg font-medium">Digite o dia:</label>
             <input type="number" name="dia" placeholder="Dia" required class="w-full p-2 border rounded-lg">
@@ -149,7 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p class="text-center mt-4">Data formatada: <?= $dataFormatada ?></p>
             <?php endif; ?>
 
-
+        </form>
+        <form method="POST" class="space-y-4">
             <label class="block text-lg font-medium">Digite um número:</label>
             <input type="number" name="numero" placeholder="Digite o número" required class="w-full p-2 border rounded-lg">
 
@@ -157,6 +161,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if (isset($raizQuadrada)): ?>
                 <p class="text-center mt-4">Raiz quadrada: <?= $raizQuadrada ?></p>
             <?php endif; ?>
+        </form>
+
+        <form method="POST" class="space-y-4">
 
 
             <label class="block text-lg font-medium">Digite um número decimal:</label>
@@ -166,7 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php if (isset($numeroArredondado)): ?>
                 <p class="text-center mt-4">Número arredondado: <?= $numeroArredondado ?></p>
             <?php endif; ?>
-
+        </form>
+        <form method="POST" class="space-y-4">
 
             <label class="block text-lg font-medium">Digite a primeira data (dd/mm/YYYY):</label>
             <input type="text" name="data1" placeholder="dd/mm/YYYY" required class="w-full p-2 border rounded-lg">
