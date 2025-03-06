@@ -1,4 +1,4 @@
-# Bem vindo aos projetos de Linguage de Programaçao 4 👋
+# Bem vindo aos projetos de Linguagem de Programaçao 4 👋
 
 Esse é um projeto PHP Utilizando [Tailwind CSS](https://tailwindcss.com) e [Docker](https://www.docker.com)
 

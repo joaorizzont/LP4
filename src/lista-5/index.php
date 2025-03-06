@@ -1,9 +1,9 @@
 <?php
 
-// Função para adicionar contatos
-function adicionarContato($contatos, $nome, $telefone) {
-    // Verificar duplicatas
-    if (isset($contatos[$nome]) || in_array($telefone, $contatos)) {
+declare(strict_types=1);
+
+function adicionarContato(array $contatos, string $nome, string $telefone): array {
+    if (isset($contatos[$nome]) || in_array($telefone, $contatos, true)) {
         return $contatos;
     }
 
@@ -12,19 +12,22 @@ function adicionarContato($contatos, $nome, $telefone) {
     return $contatos;
 }
 
-// Função para calcular a média dos alunos
-function adicionarAluno($alunos, $nome, $notas) {
+
+function adicionarAluno(array $alunos, string $nome, array $notas): array {
+    if (count($notas) === 0) {
+        throw new InvalidArgumentException("A lista de notas não pode estar vazia.");
+    }
+    
     $media = array_sum($notas) / count($notas);
     $alunos[$nome] = $media;
     arsort($alunos);
     return $alunos;
 }
 
-// Função para aplicar desconto nos produtos
-function adicionarProduto($produtos, $codigo, $nome, $preco) {
-    // Aplica o desconto
+
+function adicionarProduto(array $produtos, string $codigo, string $nome, float $preco): array {
     if ($preco > 100) {
-        $preco *= 0.9; // 10% de desconto
+        $preco *= 0.9; 
     }
 
     $produtos[$codigo] = ['nome' => $nome, 'preco' => $preco];
@@ -32,69 +35,23 @@ function adicionarProduto($produtos, $codigo, $nome, $preco) {
     return $produtos;
 }
 
-// Função para aplicar imposto nos itens
-function adicionarItem($itens, $nome, $preco) {
-    // Aplica o imposto de 15%
+
+function adicionarItem(array $itens, string $nome, float $preco): array {
     $preco *= 1.15;
     $itens[$nome] = $preco;
     asort($itens);
     return $itens;
 }
 
-// Função para verificar livros com baixa quantidade em estoque
-function adicionarLivro($livros, $titulo, $quantidade) {
+
+function adicionarLivro(array $livros, string $titulo, int $quantidade): array {
     $livros[$titulo] = $quantidade;
     ksort($livros);
     return $livros;
 }
 
-// Inicialização de variáveis para resultados
-$contatos = [];
-$alunos = [];
-$produtos = [];
-$itens = [];
-$livros = [];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // 1. Formulário de contatos
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST['contato_nome' . $i]) && isset($_POST['contato_telefone' . $i])) {
-            $contatos = adicionarContato($contatos, $_POST['contato_nome' . $i], $_POST['contato_telefone' . $i]);
-        }
-    }
-
-    // 2. Formulário de alunos
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST['aluno_nome' . $i]) && isset($_POST['aluno_notas' . $i])) {
-            $notas = explode(',', $_POST['aluno_notas' . $i]);
-            $alunos = adicionarAluno($alunos, $_POST['aluno_nome' . $i], $notas);
-        }
-    }
-
-    // 3. Formulário de produtos
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST['produto_codigo' . $i]) && isset($_POST['produto_nome' . $i]) && isset($_POST['produto_preco' . $i])) {
-            $produtos = adicionarProduto($produtos, $_POST['produto_codigo' . $i], $_POST['produto_nome' . $i], $_POST['produto_preco' . $i]);
-        }
-    }
-
-    // 4. Formulário de itens
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST['item_nome' . $i]) && isset($_POST['item_preco' . $i])) {
-            $itens = adicionarItem($itens, $_POST['item_nome' . $i], $_POST['item_preco' . $i]);
-        }
-    }
-
-    // 5. Formulário de livros
-    for ($i = 1; $i <= 5; $i++) {
-        if (isset($_POST['livro_titulo' . $i]) && isset($_POST['livro_quantidade' . $i])) {
-            $livros = adicionarLivro($livros, $_POST['livro_titulo' . $i], $_POST['livro_quantidade' . $i]);
-        }
-    }
-}
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -112,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <form method="POST" class="space-y-4">
             
-            <!-- Exercício 1 - Contatos -->
+
             <h2 class="text-xl font-semibold">Contatos (Nome e Telefone)</h2>
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label class="block text-lg font-medium">Nome do Contato <?= $i ?>:</label>
@@ -132,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             <?php endif; ?>
             
-            <!-- Exercício 2 - Alunos -->
+
             <h2 class="text-xl font-semibold">Alunos (Nome e Notas)</h2>
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label class="block text-lg font-medium">Nome do Aluno <?= $i ?>:</label>
@@ -152,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             <?php endif; ?>
 
-            <!-- Exercício 3 - Produtos -->
+
             <h2 class="text-xl font-semibold">Produtos (Código, Nome e Preço)</h2>
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label class="block text-lg font-medium">Código do Produto <?= $i ?>:</label>
@@ -175,7 +132,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </ul>
             <?php endif; ?>
 
-            <!-- Exercício 4 - Itens -->
             <h2 class="text-xl font-semibold">Itens (Nome e Preço)</h2>
             <?php for ($i = 1; $i <= 5; $i++): ?>
                 <label class="block text-lg font-medium">Nome do Item <?= $i ?>:</label>

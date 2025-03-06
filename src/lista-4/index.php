@@ -1,12 +1,13 @@
 <?php
 
-function contarCaracteres($palavra)
+declare(strict_types=1);
+
+function contarCaracteres(string $palavra): int
 {
     return strlen($palavra);
 }
 
-
-function mostrarMaiusculoMinusculo($palavra)
+function mostrarMaiusculoMinusculo(string $palavra): array
 {
     return [
         'maiúsculo' => strtoupper($palavra),
@@ -14,39 +15,38 @@ function mostrarMaiusculoMinusculo($palavra)
     ];
 }
 
-
-function verificarSubString($palavra1, $palavra2)
+function verificarSubString(string $palavra1, string $palavra2): bool
 {
     return strpos($palavra1, $palavra2) !== false;
 }
 
-
-function validarData($dia, $mes, $ano)
+function validarData(int $dia, int $mes, int $ano): string
 {
     return checkdate($mes, $dia, $ano) ? sprintf("%02d/%02d/%04d", $dia, $mes, $ano) : "Data inválida";
 }
 
-
-function raizQuadrada($numero)
+function raizQuadrada(float $numero): float
 {
     return sqrt($numero);
 }
 
-
-function arredondarNumero($numero)
+function arredondarNumero(float $numero): float
 {
     return round($numero);
 }
 
-
-function diferencaDatas($data1, $data2)
+function diferencaDatas(string $data1, string $data2): int
 {
     $data1 = DateTime::createFromFormat('d/m/Y', $data1);
     $data2 = DateTime::createFromFormat('d/m/Y', $data2);
+
+    if (!$data1 || !$data2) {
+        throw new InvalidArgumentException("Formato de data inválido. Use dd/mm/yyyy.");
+    }
+
     $intervalo = $data1->diff($data2);
     return $intervalo->days;
 }
-
 
 $caracteres = null;
 $maiusculoMinusculo = null;
@@ -56,39 +56,34 @@ $raizQuadrada = null;
 $numeroArredondado = null;
 $difDias = null;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($_POST['palavra'])) {
-
         $caracteres = contarCaracteres($_POST['palavra']);
-
-
         $maiusculoMinusculo = mostrarMaiusculoMinusculo($_POST['palavra']);
     }
 
     if (!empty($_POST['palavra1']) && !empty($_POST['palavra2'])) {
-
         $subString = verificarSubString($_POST['palavra1'], $_POST['palavra2']);
     }
 
     if (!empty($_POST['dia']) && !empty($_POST['mes']) && !empty($_POST['ano'])) {
-
-        $dataFormatada = validarData($_POST['dia'], $_POST['mes'], $_POST['ano']);
+        $dataFormatada = validarData((int)$_POST['dia'], (int)$_POST['mes'], (int)$_POST['ano']);
     }
 
     if (!empty($_POST['numero'])) {
-
-        $raizQuadrada = raizQuadrada($_POST['numero']);
+        $raizQuadrada = raizQuadrada((float)$_POST['numero']);
     }
 
     if (!empty($_POST['flutuante'])) {
-
-        $numeroArredondado = arredondarNumero($_POST['flutuante']);
+        $numeroArredondado = arredondarNumero((float)$_POST['flutuante']);
     }
 
     if (!empty($_POST['data1']) && !empty($_POST['data2'])) {
-
-        $difDias = diferencaDatas($_POST['data1'], $_POST['data2']);
+        try {
+            $difDias = diferencaDatas($_POST['data1'], $_POST['data2']);
+        } catch (InvalidArgumentException $e) {
+            $difDias = $e->getMessage();
+        }
     }
 }
 ?>
