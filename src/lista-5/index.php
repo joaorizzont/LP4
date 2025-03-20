@@ -1,177 +1,177 @@
 <?php
 
-declare(strict_types=1);
+$tipo = $_POST["tipo"] ?? "";
+$resultado = null;
 
-function adicionarContato(array $contatos, string $nome, string $telefone): array {
-    if (isset($contatos[$nome]) || in_array($telefone, $contatos, true)) {
-        return $contatos;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    function processarDados($tipo)
+    {
+        switch ($tipo) {
+            case "contatos":
+                $contatos = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $nome = $_POST["nome$i"] ?? "";
+                    $telefone = $_POST["telefone$i"] ?? "";
+                    if (!empty($nome) && !empty($telefone) && !isset($contatos[$nome]) && !in_array($telefone, $contatos)) {
+                        $contatos[$nome] = $telefone;
+                    }
+                }
+                ksort($contatos);
+                return $contatos;
+
+            case "alunos":
+                $alunos = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $nome = $_POST["nome$i"] ?? "";
+                    $nota1 = $_POST["nota{$i}1"] ?? 0;
+                    $nota2 = $_POST["nota{$i}2"] ?? 0;
+                    $nota3 = $_POST["nota{$i}3"] ?? 0;
+                    if (!empty($nome)) {
+                        $media = ($nota1 + $nota2 + $nota3) / 3;
+                        $alunos[$nome] = $media;
+                    }
+                }
+                arsort($alunos);
+                return $alunos;
+
+            case "itens":
+                $produtos = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $nome = $_POST["nome$i"] ?? "";
+                    $preco = $_POST["preco$i"] ?? 0;
+                    if (!empty($nome)) {
+                        $preco *= 1.15;
+                        $produtos[$nome] = $preco;
+                    }
+                }
+                asort($produtos);
+                return $produtos;
+
+            case "produtos":
+                $produtos = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $codigo = $_POST["codigo$i"] ?? "";
+                    $nome = $_POST["nome$i"] ?? "";
+                    $preco = $_POST["preco$i"] ?? 0;
+                    if (!empty($codigo) && !empty($nome)) {
+                        if ($preco > 100) {
+                            $preco *= 0.9;
+                        }
+                        $produtos[$codigo] = ["nome" => $nome, "preco" => $preco];
+                    }
+                }
+                uasort($produtos, fn($a, $b) => strcmp($a['nome'], $b['nome']));
+                return $produtos;
+
+            case "livros":
+                $livros = [];
+                for ($i = 1; $i <= 5; $i++) {
+                    $titulo = $_POST["titulo$i"] ?? "";
+                    $quantidade = $_POST["quantidade$i"] ?? 0;
+                    if (!empty($titulo)) {
+                        $livros[$titulo] = $quantidade;
+                    }
+                }
+                ksort($livros);
+                return $livros;
+        }
     }
-
-    $contatos[$nome] = $telefone;
-    ksort($contatos);
-    return $contatos;
+    $resultado = processarDados($tipo);
 }
-
-
-function adicionarAluno(array $alunos, string $nome, array $notas): array {
-    if (count($notas) === 0) {
-        throw new InvalidArgumentException("A lista de notas não pode estar vazia.");
-    }
-    
-    $media = array_sum($notas) / count($notas);
-    $alunos[$nome] = $media;
-    arsort($alunos);
-    return $alunos;
-}
-
-
-function adicionarProduto(array $produtos, string $codigo, string $nome, float $preco): array {
-    if ($preco > 100) {
-        $preco *= 0.9; 
-    }
-
-    $produtos[$codigo] = ['nome' => $nome, 'preco' => $preco];
-    ksort($produtos);
-    return $produtos;
-}
-
-
-function adicionarItem(array $itens, string $nome, float $preco): array {
-    $preco *= 1.15;
-    $itens[$nome] = $preco;
-    asort($itens);
-    return $itens;
-}
-
-
-function adicionarLivro(array $livros, string $titulo, int $quantidade): array {
-    $livros[$titulo] = $quantidade;
-    ksort($livros);
-    return $livros;
-}
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Exercícios 5 - PHP</title>
+    <title>Lista de Exercícios - PHP</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center mb-6">Lista de Exercícios 5 - PHP</h1>
+<body class="bg-gray-100 text-gray-900 font-sans">
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold text-center mb-6">Lista de Exercícios</h1>
+        <form method="POST" class="space-y-6">
+            <label class="block font-medium text-lg">Escolha a categoria:</label>
+            <select name="tipo" onchange="this.form.submit()" class="block w-full p-2 border rounded-md">
+                <option value="">-- Selecione --</option>
+                <option value="contatos" <?= ($tipo == "contatos") ? "selected" : "" ?>>Contatos</option>
+                <option value="alunos" <?= ($tipo == "alunos") ? "selected" : "" ?>>Alunos</option>
+                <option value="produtos" <?= ($tipo == "produtos") ? "selected" : "" ?>>Produtos</option>
+                <option value="itens" <?= ($tipo == "itens") ? "selected" : "" ?>>Itens</option>
+                <option value="livros" <?= ($tipo == "livros") ? "selected" : "" ?>>Livros</option>
+            </select>
 
-        <form method="POST" class="space-y-4">
-            
+            <?php if ($tipo == "contatos"): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <div class="flex space-x-4">
+                        <input type="text" name="nome<?= $i ?>" placeholder="Nome <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="text" name="telefone<?= $i ?>" placeholder="Telefone <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                    </div>
+                <?php endfor; ?>
 
-            <h2 class="text-xl font-semibold">Contatos (Nome e Telefone)</h2>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <label class="block text-lg font-medium">Nome do Contato <?= $i ?>:</label>
-                <input type="text" name="contato_nome<?= $i ?>" placeholder="Digite o nome" class="w-full p-2 border rounded-lg">
+            <?php elseif ($tipo == "alunos"): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <div class="flex space-x-4">
+                        <input type="text" name="nome<?= $i ?>" placeholder="Nome <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="nota<?= $i ?>1" placeholder="Nota 1" step="0.1" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="nota<?= $i ?>2" placeholder="Nota 2" step="0.1" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="nota<?= $i ?>3" placeholder="Nota 3" step="0.1" class="block w-full p-2 border rounded-md" required>
+                    </div>
+                <?php endfor; ?>
 
-                <label class="block text-lg font-medium">Telefone do Contato <?= $i ?>:</label>
-                <input type="text" name="contato_telefone<?= $i ?>" placeholder="Digite o telefone" class="w-full p-2 border rounded-lg">
-            <?php endfor; ?>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Adicionar Contatos</button>
-            
-            <?php if (!empty($contatos)): ?>
-                <h3 class="text-xl font-semibold mt-4">Contatos Ordenados:</h3>
-                <ul>
-                    <?php foreach ($contatos as $nome => $telefone): ?>
-                        <li><?= $nome ?> - <?= $telefone ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-            
+            <?php elseif ($tipo == "produtos"): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <div class="flex space-x-4">
+                        <input type="text" name="codigo<?= $i ?>" placeholder="Código <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="text" name="nome<?= $i ?>" placeholder="Nome <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="preco<?= $i ?>" placeholder="Preço" step="0.01" class="block w-full p-2 border rounded-md" required>
+                    </div>
+                <?php endfor; ?>
 
-            <h2 class="text-xl font-semibold">Alunos (Nome e Notas)</h2>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <label class="block text-lg font-medium">Nome do Aluno <?= $i ?>:</label>
-                <input type="text" name="aluno_nome<?= $i ?>" placeholder="Digite o nome" class="w-full p-2 border rounded-lg">
+            <?php elseif ($tipo == "itens"): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <div class="flex space-x-4">
+                        <input type="text" name="nome<?= $i ?>" placeholder="Nome <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="preco<?= $i ?>" placeholder="Preço" step="0.01" class="block w-full p-2 border rounded-md" required>
+                    </div>
+                <?php endfor; ?>
 
-                <label class="block text-lg font-medium">Notas do Aluno <?= $i ?> (separadas por vírgula):</label>
-                <input type="text" name="aluno_notas<?= $i ?>" placeholder="Digite as notas" class="w-full p-2 border rounded-lg">
-            <?php endfor; ?>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Adicionar Alunos</button>
-            
-            <?php if (!empty($alunos)): ?>
-                <h3 class="text-xl font-semibold mt-4">Alunos Ordenados por Média:</h3>
-                <ul>
-                    <?php foreach ($alunos as $nome => $media): ?>
-                        <li><?= $nome ?> - Média: <?= number_format($media, 2) ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
+            <?php elseif ($tipo == "livros"): ?>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <div class="flex space-x-4">
+                        <input type="text" name="titulo<?= $i ?>" placeholder="Título <?= $i ?>" class="block w-full p-2 border rounded-md" required>
+                        <input type="number" name="quantidade<?= $i ?>" placeholder="Quantidade em estoque" class="block w-full p-2 border rounded-md" required>
+                    </div>
+                <?php endfor; ?>
 
-
-            <h2 class="text-xl font-semibold">Produtos (Código, Nome e Preço)</h2>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <label class="block text-lg font-medium">Código do Produto <?= $i ?>:</label>
-                <input type="text" name="produto_codigo<?= $i ?>" placeholder="Digite o código" class="w-full p-2 border rounded-lg">
-
-                <label class="block text-lg font-medium">Nome do Produto <?= $i ?>:</label>
-                <input type="text" name="produto_nome<?= $i ?>" placeholder="Digite o nome" class="w-full p-2 border rounded-lg">
-
-                <label class="block text-lg font-medium">Preço do Produto <?= $i ?>:</label>
-                <input type="text" name="produto_preco<?= $i ?>" placeholder="Digite o preço" class="w-full p-2 border rounded-lg">
-            <?php endfor; ?>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Adicionar Produtos</button>
-            
-            <?php if (!empty($produtos)): ?>
-                <h3 class="text-xl font-semibold mt-4">Produtos com Desconto:</h3>
-                <ul>
-                    <?php foreach ($produtos as $codigo => $produto): ?>
-                        <li><?= $produto['nome'] ?> - Preço: R$ <?= number_format($produto['preco'], 2) ?></li>
-                    <?php endforeach; ?>
-                </ul>
             <?php endif; ?>
 
-            <h2 class="text-xl font-semibold">Itens (Nome e Preço)</h2>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <label class="block text-lg font-medium">Nome do Item <?= $i ?>:</label>
-                <input type="text" name="item_nome<?= $i ?>" placeholder="Digite o nome" class="w-full p-2 border rounded-lg">
-
-                <label class="block text-lg font-medium">Preço do Item <?= $i ?>:</label>
-                <input type="text" name="item_preco<?= $i ?>" placeholder="Digite o preço" class="w-full p-2 border rounded-lg">
-            <?php endfor; ?>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Adicionar Itens</button>
-            
-            <?php if (!empty($itens)): ?>
-                <h3 class="text-xl font-semibold mt-4">Itens com Imposto Aplicado:</h3>
-                <ul>
-                    <?php foreach ($itens as $nome => $preco): ?>
-                        <li><?= $nome ?> - Preço com Imposto: R$ <?= number_format($preco, 2) ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
-            <!-- Exercício 5 - Livros -->
-            <h2 class="text-xl font-semibold">Livros (Título e Quantidade em Estoque)</h2>
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                <label class="block text-lg font-medium">Título do Livro <?= $i ?>:</label>
-                <input type="text" name="livro_titulo<?= $i ?>" placeholder="Digite o título" class="w-full p-2 border rounded-lg">
-
-                <label class="block text-lg font-medium">Quantidade em Estoque do Livro <?= $i ?>:</label>
-                <input type="text" name="livro_quantidade<?= $i ?>" placeholder="Digite a quantidade" class="w-full p-2 border rounded-lg">
-            <?php endfor; ?>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Adicionar Livros</button>
-            
-            <?php if (!empty($livros)): ?>
-                <h3 class="text-xl font-semibold mt-4">Livros Ordenados:</h3>
-                <ul>
-                    <?php foreach ($livros as $titulo => $quantidade): ?>
-                        <li><?= $titulo ?> - Quantidade: <?= $quantidade ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition">Processar</button>
         </form>
+
+        <?php if ($resultado): ?>
+            <h2 class="text-2xl font-semibold mt-6">Resultado:</h2>
+            <?php if ($tipo == "produtos"): ?>
+                <h3 class="text-xl font-semibold mt-4">Produtos com preço após imposto:</h3>
+                <pre class="bg-gray-100 p-4 rounded-md"><?php print_r($resultado); ?></pre>
+            <?php elseif ($tipo == "livros"): ?>
+                <h3 class="text-xl font-semibold mt-4">Livros em estoque:</h3>
+                <ul class="list-disc ml-6">
+                    <?php foreach ($resultado as $titulo => $quantidade): ?>
+                        <li>
+                            <?php echo $titulo . ": " . $quantidade; ?>
+                            <?php if ($quantidade < 5): ?>
+                                <strong class="text-red-500"> (Baixa quantidade!)</strong>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <pre class="bg-gray-100 p-4 rounded-md"><?php print_r($resultado); ?></pre>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 </body>
 
