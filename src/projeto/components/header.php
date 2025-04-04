@@ -23,6 +23,7 @@ if (!isset($_SESSION["user"])) {
         </button>
 
         <nav class="hidden md:flex gap-5">
+            <a href="cultivos.php" class="hover:underline">Cultivos</a>
             <a href="terrenos.php" class="hover:underline">Terrenos</a>
             <a href="moradores.php" class="hover:underline">Moradores</a>
             <a href="plantas.php" class="hover:underline">Plantas</a>
@@ -30,13 +31,14 @@ if (!isset($_SESSION["user"])) {
 
         <div class="flex items-center gap-5">
             <h1>Bem-vindo, <?= htmlspecialchars($_SESSION["user"]) ?>!</h1>
-            <a href="logout.php" class="text-white underline">Sair</a>
+            <a href="index.php" class="text-white underline">Sair</a>
         </div>
     </header>
 
     <div id="sidebar"
         class="fixed top-0 left-0 w-64 h-full bg-green-800 text-white transform -translate-x-full transition-transform duration-300 p-5 flex flex-col gap-4">
         <button id="close-btn" class="text-white text-2xl self-end focus:outline-none">✖</button>
+        <a href="cultivos.php" class="hover:underline">Cultivos</a>
         <a href="terrenos.php" class="hover:underline">Terrenos</a>
         <a href="moradores.php" class="hover:underline">Moradores</a>
         <a href="plantas.php" class="hover:underline">Plantas</a>

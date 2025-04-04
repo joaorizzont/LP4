@@ -1,18 +1,29 @@
 <?php
 session_start();
+require_once('db/conexao.php'); // conexão com o banco
 
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST["username"] ?? "";
+    $email = trim($_POST["email"] ?? "");
     $password = $_POST["password"] ?? "";
 
-    if ($username === "1" && $password === "1") {
-        $_SESSION["user"] = $username;
-        header("Location: dashboard.php");
-        exit();
+    if (!empty($email) && !empty($password)) {
+        $query = "SELECT * FROM usuarios WHERE email = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$email]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($usuario && $password === $usuario["senha"]) {
+            $_SESSION["user"] = $usuario["nome"];
+            $_SESSION["user_id"] = $usuario["id"];
+            header("Location: cultivos.php");
+            exit();
+        } else {
+            $error = "E-mail ou senha inválidos.";
+        }
     } else {
-        $error = "Credenciais inválidas";
+        $error = "Preencha todos os campos.";
     }
 }
 ?>
@@ -30,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
         <form method="POST">
             <div class="mb-4">
-                <label class="block text-gray-700">Username</label>
-                <input type="text" name="username" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
+                <label class="block text-gray-700">Email</label>
+                <input type="text" name="email" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700">Senha</label>
