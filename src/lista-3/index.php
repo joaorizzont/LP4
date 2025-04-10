@@ -7,15 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     function calcularResultado($tipo)
     {
-        (int) $num1 = $_POST["num1"] ?? 0;
-        (int) $num2 = $_POST["num2"] ?? 0;
-        (int) $num3 = $_POST["num3"] ?? 0;
-        (int) $num4 = $_POST["num4"] ?? 0;
-        (int) $num5 = $_POST["num5"] ?? 0;
-        (int) $num6 = $_POST["num6"] ?? 0;
-        (int) $num7 = $_POST["num7"] ?? 0;
-        (float) $produto = $_POST["produto"] ?? 0;
-        (int) $mes = $_POST["mes"] ?? 0;
+        $num1 = (int) ($_POST["num1"] ?? 0);
+        $num2 = (int) ($_POST["num2"] ?? 0);
+        $num3 = (int) ($_POST["num3"] ?? 0);
+        $num4 = (int) ($_POST["num4"] ?? 0);
+        $num5 = (int) ($_POST["num5"] ?? 0);
+        $num6 = (int) ($_POST["num6"] ?? 0);
+        $num7 = (int) ($_POST["num7"] ?? 0);
+        $produto = (float) ($_POST["produto"] ?? 0);
+        $mes = (int) ($_POST["mes"] ?? 0);
 
         switch ($tipo) {
             case "menorValor":
