@@ -7,29 +7,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     function calcularResultado($tipo)
     {
-        (float) $num1 = $_POST["num1"] ?? 0;
-        (float) $num2 = $_POST["num2"] ?? 0;
-        (float) $nota1 = $_POST["nota1"] ?? 0;
-        (float) $nota2 = $_POST["nota2"] ?? 0;
-        (float) $nota3 = $_POST["nota3"] ?? 0;
-        (float) $celsius = $_POST["celsius"] ?? 0;
-        (float) $fahrenheit = $_POST["fahrenheit"] ?? 0;
-        (float) $largura = $_POST["largura"] ?? 0;
-        (float) $altura = $_POST["altura"] ?? 0;
-        (float) $raio = $_POST["raio"] ?? 0;
-        (float) $base = $_POST["base"] ?? 0;
-        (float) $expoente = $_POST["expoente"] ?? 0;
-        (float) $metros = $_POST["metros"] ?? 0;
-        (float) $km = $_POST["km"] ?? 0;
-        (float) $peso = $_POST["peso"] ?? 0;
-        (float) $preco = $_POST["preco"] ?? 0;
-        (float) $percentual = $_POST["percentual"] ?? 0;
-        (float) $capital = $_POST["capital"] ?? 0;
-        (float) $taxa = $_POST["taxa"] ?? 0;
-        (float) $periodo = $_POST["periodo"] ?? 0;
-        (float) $dias = $_POST["dias"] ?? 0;
-        (float) $distancia = $_POST["distancia"] ?? 0;
-        (float) $tempo = $_POST["tempo"] ?? 1;
+        $num1 = (float) ($_POST["num1"] ?? 0);
+        $num2 = (float) ($_POST["num2"] ?? 0);
+        $nota1 = (float) ($_POST["nota1"] ?? 0);
+        $nota2 = (float) ($_POST["nota2"] ?? 0);
+        $nota3 = (float) ($_POST["nota3"] ?? 0);
+        $celsius = (float) ($_POST["celsius"] ?? 0);
+        $fahrenheit = (float) ($_POST["fahrenheit"] ?? 0);
+        $largura = (float) ($_POST["largura"] ?? 0);
+        $altura = (float) ($_POST["altura"] ?? 0);
+        $raio = (float) ($_POST["raio"] ?? 0);
+        $base = (float) ($_POST["base"] ?? 0);
+        $expoente = (float) ($_POST["expoente"] ?? 0);
+        $metros = (float) ($_POST["metros"] ?? 0);
+        $km = (float) ($_POST["km"] ?? 0);
+        $peso = (float) ($_POST["peso"] ?? 0);
+        $preco = (float) ($_POST["preco"] ?? 0);
+        $percentual = (float) ($_POST["percentual"] ?? 0);
+        $capital = (float) ($_POST["capital"] ?? 0);
+        $taxa = (float) ($_POST["taxa"] ?? 0);
+        $periodo = (float) ($_POST["periodo"] ?? 0);
+        $dias = (float) ($_POST["dias"] ?? 0);
+        $distancia = (float) ($_POST["distancia"] ?? 0);
+        $tempo = (float) ($_POST["tempo"] ?? 1);
+        
 
         switch ($tipo) {
             case "soma":
@@ -61,7 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case "kmParaMilhas":
                 return $km * 0.621371;
             case "imc":
+               if($altura != 0){
                 return $peso / pow($altura, 2);
+               }
             case "desconto":
                 return $preco - ($preco * ($percentual / 100));
             case "jurosSimples":
