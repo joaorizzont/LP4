@@ -13,6 +13,7 @@
         <a href="lista-3/index.php" class="px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition">Lista 3</a>
         <a href="lista-4/index.php" class="px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition">Lista 4</a>
         <a href="lista-5/index.php" class="px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition">Lista 5</a>
+        <a href="projeto/index.php" class="px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition">Projeto</a>
     </div>
 </body>
 </html>

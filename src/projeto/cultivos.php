@@ -34,23 +34,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $terreno_id = $_POST["terreno_id"] ?? "";
         $morador_id = $_POST["morador_id"] ?? "";
         $planta_id = $_POST["planta_id"] ?? "";
-
+        
+      
         if ($acao === "adicionar") {
-            $stmt = $pdo->prepare("INSERT INTO cultivos (inicio, fim, terreno_id, morador_id, planta_id) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$inicio, $fim, $terreno_id, $morador_id, $planta_id]);
-            reloadPage();
+            try {
+                $verifica = $pdo->prepare("SELECT COUNT(*) FROM moradores WHERE id = ?");
+                $verifica->execute([$morador_id]);
+                if ($verifica->fetchColumn() == 0) {
+                    throw new Exception("Morador selecionado não existe.");
+                }
+                
+                $query = "INSERT INTO cultivos (inicio, fim, terreno_id, morador_id, planta_id) VALUES ($inicio, $fim, $terreno_id, $morador_id, $planta_id)";
+                
+                // echo $query;
+
+                $stmt = $pdo->prepare("INSERT INTO cultivos (inicio, fim, terreno_id, morador_id, planta_id) VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$inicio, $fim, $terreno_id, $morador_id, $planta_id]);
+                reloadPage();
+            } catch (Exception $e) {
+                echo "<p style='color: red;'>Erro: " . $e->getMessage() . "</p>";
+            }
         }
 
         if (isset($id)) {
             if ($acao === "atualizar") {
-                $stmt = $pdo->prepare("UPDATE cultivos SET inicio = ?, fim = ?, terreno_id = ?, morador_id = ?, planta_id = ? WHERE id = ?");
-                $stmt->execute([$inicio, $fim, $terreno_id, $morador_id, $planta_id, $id]);
-                reloadPage();
+                try {
+                    $stmt = $pdo->prepare("UPDATE cultivos SET inicio = ?, fim = ?, terreno_id = ?, morador_id = ?, planta_id = ? WHERE id = ?");
+                    $stmt->execute([$inicio, $fim, $terreno_id, $morador_id, $planta_id, $id]);
+                    reloadPage();
+                } catch (Exception $e) {
+                    echo "<p style='color: red;'>Erro ao atualizar: " . $e->getMessage() . "</p>";
+                }
             }
             if ($acao === "excluir") {
-                $stmt = $pdo->prepare("DELETE FROM cultivos WHERE id = ?");
-                $stmt->execute([$id]);
-                reloadPage();
+                try {
+                    $stmt = $pdo->prepare("DELETE FROM cultivos WHERE id = ?");
+                    $stmt->execute([$id]);
+                    reloadPage();
+                } catch (Exception $e) {
+                    echo "<p style='color: red;'>Erro ao excluir: " . $e->getMessage() . "</p>";
+                }
             }
         }
     }
@@ -74,7 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <label class="block text-gray-700">Terreno</label>
                 <select name="terreno_id" class="w-full p-2 border rounded" required>
                     <?php foreach ($terrenos as $terreno): ?>
-                        <option value="<?= $terreno['id'] ?>"><?= $terreno['descricao'] ?></option>
+                        <option value="<?= $terreno['id'] ?>" <?= $terreno['id'] == $cultivoEditado['terreno_id'] ? 'selected' : '' ?>>
+                            <?= $terreno['descricao'] ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -82,7 +107,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <label class="block text-gray-700">Morador</label>
                 <select name="morador_id" class="w-full p-2 border rounded" required>
                     <?php foreach ($moradores as $morador): ?>
-                        <option value="<?= $morador['id'] ?>"><?= $morador['nome'] ?></option>
+                        <option value="<?= $morador['id'] ?>" <?= $morador['id'] == $cultivoEditado['morador_id'] ? 'selected' : '' ?>>
+                            <?= $morador['nome'] ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -90,7 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <label class="block text-gray-700">Planta</label>
                 <select name="planta_id" class="w-full p-2 border rounded" required>
                     <?php foreach ($plantas as $planta): ?>
-                        <option value="<?= $planta['id'] ?>"><?= $planta['especie'] ?></option>
+                        <option value="<?= $planta['id'] ?>" <?= $planta['id'] == $cultivoEditado['planta_id'] ? 'selected' : '' ?>>
+                            <?= $planta['especie'] ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -115,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php foreach ($cultivos as $cultivo): ?>
                     <tr class="border">
                         <td class="p-2"><?= date('d/m/Y', strtotime($cultivo['inicio'])) ?></td>
-                        <td class="p-2"><?= date('d/m/Y', strtotime($cultivo['fim'])) ?></td>
+                        <td class="p-2"><?= $cultivo['fim'] ? date('d/m/Y', strtotime($cultivo['fim'])) : '-' ?></td>
                         <td class="p-2"><?= $cultivo['terreno'] ?></td>
                         <td class="p-2"><?= $cultivo['morador'] ?></td>
                         <td class="p-2"><?= $cultivo['planta'] ?></td>
